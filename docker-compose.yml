@@ -1,0 +1,19 @@
+version: '2'
+
+networks:
+  yasgui_network:
+    external:
+      name: nginxproxynetwork
+
+services:
+  yasgui:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: dr_freshbeef
+    environment:
+      - VIRTUAL_HOST=yasgui.sd.di.huc.knaw.nl
+    volumes:
+      - /home/robz/:/home
+    networks:
+      - yasgui_network

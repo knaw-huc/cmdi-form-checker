@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  formchecker:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: formchecker
+    environment:
+      - APPLICATION_NAME=CMDI Form Checker
+      - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/clarin.eu:cr1:p_1708423613607/xml
+      - HOST_URI=http://localhost/
+    ports:
+      - 80:80
+    volumes:
+      - ./www:/var/www/html
+    networks:
+      - checknet
+
+networks:
+  checknet:
+    external: false
