@@ -1,19 +1,21 @@
 version: '2'
 
-networks:
-  yasgui_network:
-    external:
-      name: nginxproxynetwork
-
 services:
-  yasgui:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: dr_freshbeef
+  formchecker:
+    image: registry.diginfra.net/tsd/cmdi-form_checker:0.9
+    container_name: formchecker
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.formchecker.entrypoints=http"
+      - "traefik.http.routers.formchecker.rule=Host(`cmdiform.sd.di.huc.knaw.nl`)"
     environment:
-      - VIRTUAL_HOST=yasgui.sd.di.huc.knaw.nl
-    volumes:
-      - /home/robz/:/home
+      - 'APPLICATION_NAME=CMDI Form Checker: Data Envelopes'
+      - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/clarin.eu:cr1:p_1708423613607/xml
+      - HOST_URI=https://cmdiform.sd.di.huc.knaw.nl/
     networks:
-      - yasgui_network
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true

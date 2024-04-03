@@ -21,7 +21,7 @@
             //var host = "http://localhost:8091/fetch_json.php";
 
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: host,
                 data: params,
                 success: function (json) {

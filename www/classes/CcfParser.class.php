@@ -105,11 +105,19 @@ class Ccfparser {
     }
 
     private function _get_profile($uri) {
-        $ch = curl_init($uri);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = curl_exec($ch);
-        curl_close($ch);
+        $options = array('Origin: ' . $_ENV["https://cmdiform.sd.di.huc.knaw.nl"], 'Access-Control-Request-Method: POST', 'Access-Control-Request-Headers: X-Requested-With');
+        try {
+            $ch = curl_init($uri);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $options);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $response = curl_exec($ch);
+            curl_close($ch);
+        } catch (Exception $e) {
+            $response = $e;
+            echo $e;
+        }
+
         return $response;
     }
 
@@ -267,7 +275,10 @@ class Ccfparser {
                     break;
                 case 'name':
                     $retArray["name"] = $attribute->nodeValue;
-                    $retArray["label"] = $attribute->nodeValue;
+                    $retArray["label"] = preg_replace('/(?<! )(?<!^)(?<![A-Z])[A-Z]/ ', ' $0', $attribute->nodeValue);
+                    if (count($retArray["label"])) {
+                        $retArray["label"][0] = strtoupper($retArray["label"][0]);
+                    }
                     break;
                 case 'cue:displayOrder':
                     $retArray["displayOrder"] = $attribute->nodeValue;
@@ -334,6 +345,10 @@ class Ccfparser {
             }
         }
         return $retArray;
+    }
+
+    private function pimpName($str) {
+
     }
     
     private function _createAttributeList($node){

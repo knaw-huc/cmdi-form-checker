@@ -7,9 +7,9 @@ define('BASE_URL', "Go for it.");
 
 require(dirname(__FILE__) . '/classes/CcfParser.class.php');
 
-if (isset($_GET["cmdi_url"])) {
+if (isset($_POST["cmdi_url"])) {
     $record = null;
-    get_struc($_GET["cmdi_url"], $record);
+    get_struc($_POST["cmdi_url"], $record);
 } else {
     throw_error();
 }
