@@ -5,9 +5,11 @@ services:
     image: registry.diginfra.net/tsd/cmdi-form_checker:0.9
     container_name: formchecker
     environment:
-      - 'APPLICATION_NAME=CMDI Form Checker: Data Envelopes'
-      - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/clarin.eu:cr1:p_1708423613607/xml
+      - 'APPLICATION_NAME=CMDI Form Checker'
+      - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/[PROFILE_ID]/xml
       - HOST_URI=http://localhost/
+    volumes:
+      - ./www:/var/www/html/
     ports:
       - 80:80
     networks:

@@ -10,7 +10,7 @@ services:
       - "traefik.http.routers.formchecker.entrypoints=http"
       - "traefik.http.routers.formchecker.rule=Host(`cmdiform.sd.di.huc.knaw.nl`)"
     environment:
-      - 'APPLICATION_NAME=CMDI Form Checker: Data Envelopes'
+      - 'APPLICATION_NAME=CMDI Form Checker'
       - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/clarin.eu:cr1:p_1708423613607/xml
       - HOST_URI=https://cmdiform.sd.di.huc.knaw.nl/
     networks:

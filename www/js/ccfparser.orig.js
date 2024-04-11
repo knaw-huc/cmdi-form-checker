@@ -6,7 +6,7 @@ var isUploading = false;
 var cloneBuffer;
 var panelError;
 var recordEdit = false;
-var datePickerFormat = "yy-mm-dd";
+
 
 var formBuilder = {
     profileID: null,
@@ -64,9 +64,6 @@ var formBuilder = {
         }
         if (element.attributes.ValueScheme === 'date') {
             label.innerHTML = label.innerHTML + ' (' + ccfOptions.alert.date_string + ')';
-        }
-        if (element.attributes.ValueScheme === 'anyURI') {
-            label.innerHTML = label.innerHTML + ' (' + ccfOptions.alert.anyURI_string + ')';
         }
         input = document.createElement('div');
         input.setAttribute('class', 'control');
@@ -171,13 +168,6 @@ var formBuilder = {
         }
         $("#" + componentID).append(html);
         validationProfiles[element.ID] = element;
-        if (element.attributes.ValueScheme === 'date') {
-            $("#" + element.ID).datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: datePickerFormat
-            });
-        }
     },
     handleComponent: function (component, componentID) {
         html = document.createElement('div');
@@ -189,9 +179,6 @@ var formBuilder = {
         html.setAttribute('id', component.ID);
         html.setAttribute('data-name', component.attributes.name);
         html.setAttribute('data-order', component.attributes.initialOrder);
-        if (component.attributes.class !== undefined) {
-            html.setAttribute('data-class', component.attributes.class);
-        }
         header = document.createElement('div');
         header.setAttribute('class', 'componentHeader');
         //header.innerHTML = component.attributes.label;
@@ -364,9 +351,6 @@ var formBuilder = {
 
             }
         }
-        if (element.attributes.class !== undefined) {
-            control.setAttribute('data-class', element.attributes.class);
-        }
         control.setAttribute('data-validation-profile', element.ID);
         //control.setAttribute('data-order', element.attributes.initialOrder);
         $(control).addClass("input_element");
@@ -428,6 +412,10 @@ var formBuilder = {
             control.setAttribute("readonly", true);
         }
 
+        //TODO: weghalen als tweak klaar is
+        if (element.attributes.name.indexOf('mmdc_') >= 0) {
+            control.setAttribute("readonly", true);
+        }
 
         return control;
     },
@@ -974,14 +962,6 @@ function duplicateComponent(obj, set) {
         var id = $(this).attr("id");
         $(this).attr('id', id + '_' + next);
         $(this).val("");
-        if (validationProfiles[$(this).attr("data-validation-profile")].attributes.ValueScheme === 'date') {
-            $(this).removeClass('hasDatepicker').removeData('datepicker').unbind()
-                .datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    dateFormat: datePickerFormat
-                });
-        }
     });
     clonedComponent.find(".expander").each(function () {
         $(this).on("click", showHideComponent);
