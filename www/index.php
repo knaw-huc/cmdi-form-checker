@@ -31,7 +31,6 @@
                     obj = json;
                     console.log(obj);
                     formBuilder.start(obj);
-
                 },
                 error: function (err) {
                     obj = {"error": err};
