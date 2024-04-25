@@ -2,7 +2,7 @@ version: '2'
 
 services:
   formchecker:
-    image: registry.diginfra.net/tsd/cmdi-form_checker:0.9
+    image: registry.diginfra.net/tsd/cmdi-form_checker:1.0
     container_name: formchecker
     restart: unless-stopped
     labels:
@@ -11,10 +11,16 @@ services:
       - "traefik.http.routers.formchecker.rule=Host(`cmdiform.sd.di.huc.knaw.nl`)"
     environment:
       - 'APPLICATION_NAME=CMDI Form Checker'
-      - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/clarin.eu:cr1:p_1708423613607/xml
+      - CMDI_URI=https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/[PROFILE_ID]/xml
       - HOST_URI=https://cmdiform.sd.di.huc.knaw.nl/
+    volumes:
+      - cmdi_tweaks:/var/www/html/data/tweaks
     networks:
       - traefik-public
+
+volumes:
+  cmdi_tweaks:
+    external: true
 
 networks:
   traefik-public:

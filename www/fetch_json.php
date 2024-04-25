@@ -16,13 +16,20 @@ if (isset($_POST["cmdi_url"])) {
 
 function get_struc($file, $record) {
     $parser = new Ccfparser();
-    //$tweakFile =  TWEAK_DIR . $_GET["profile"] . 'Tweak.xml';
+    $arr = explode(":", $_POST["cmdi_id"]);
+    if (isset($arr[2])) {
+        $tweakFile =  TWEAK_DIR .  $arr[2]. '.xml';
+    }
+    else
+    {
+        $tweakFile = TWEAK_DIR . 'dummy.xml';
+    }
 
-    //if (file_exists($tweakFile)) {
-    //    $struc = $parser->parseTweak($file, $tweakFile, TWEAKER, $record);
-    //} else {
-    $struc = $parser->parseTweak($file, null, null, $record);
-    //}
+    if (file_exists($tweakFile)) {
+        $struc = $parser->parseTweak($file, $tweakFile, TWEAKER, $record);
+    } else {
+        $struc = $parser->parseTweak($file, null, null, $record);
+    }
     send_json($struc);
 }
 

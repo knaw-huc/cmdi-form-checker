@@ -150,5 +150,11 @@ font-weight: bold;
 color: #b00;
 }
 
+.formExplanation{
+display: block;
+max-width: 600px;
+font-size: smaller;
+}
+
 
 

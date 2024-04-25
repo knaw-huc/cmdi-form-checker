@@ -25,6 +25,7 @@ class Ccfparser {
     }
 
     function parseTweak($uri, $tweakfile = null, $tweaker = null, $record = null) {
+        error_reporting(0);
         $jsonArray = array();
         $cmdifile = $this->_get_profile($uri);
         if (is_null($tweakfile)) {
@@ -56,7 +57,7 @@ class Ccfparser {
         //error_reporting(E_ALL);
         $profile = new DOMDocument();
         $profile->preserveWhiteSpace = false;
-        $profile->load($cmdifile);
+        $profile->loadXML($cmdifile);
 
         $xsl = new DOMDocument;
         $xsl->preserveWhiteSpace = false;
@@ -276,7 +277,7 @@ class Ccfparser {
                 case 'name':
                     $retArray["name"] = $attribute->nodeValue;
                     $retArray["label"] = preg_replace('/(?<! )(?<!^)(?<![A-Z])[A-Z]/ ', ' $0', $attribute->nodeValue);
-                    if (count($retArray["label"])) {
+                    if (strlen($retArray["label"])) {
                         $retArray["label"][0] = strtoupper($retArray["label"][0]);
                     }
                     break;
@@ -312,11 +313,11 @@ class Ccfparser {
                 case 'clariah:isTab':
                     $retArray["isTab"] = $child->nodeValue;
                     break;
-//                case 'clariah:inputField':
-//                    $this->_inputFieldDimensions($child, $retArray);
-//                    break;
                 case 'clariah:resource':
                     $retArray["resource"] = $child->nodeValue;
+                    break;
+                case 'clariah:explanation':
+                    $retArray["explanation"] = $child->nodeValue;
                     break;
                 case 'AttributeList':
                     $retArray["attributeList"] = $this->_createAttributeList($child);
