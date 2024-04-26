@@ -13,12 +13,12 @@ if (!isset($_GET["id"])) {
     <link rel="stylesheet" href="https://cmdicdn.sd.di.huc.knaw.nl/css/ccfstyle.css" type="text/css"/>
     <link rel="stylesheet" href="https://cmdicdn.sd.di.huc.knaw.nl/css/autocomplete.css" type="text/css"/>
     <link rel="stylesheet" href="https://cmdicdn.sd.di.huc.knaw.nl/css/jquery-ui.css" type="text/css" />
-    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/lib/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/lib/jquery.autocomplete.js"></script>
-    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/lib/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/ccf_config_en.js"></script>
-    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/src/ccfparser.js"></script>
-    <script type="text/javascript" src="js/ccforms.js"></script>
+    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/ccfparser.js"></script>
+
     <script>
         $('document').ready(function () {
             //setEvents();
