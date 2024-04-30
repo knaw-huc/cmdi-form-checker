@@ -17,7 +17,7 @@ if (!isset($_GET["id"])) {
     <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/ccf_config_en.js"></script>
-    <script type="text/javascript" src="https://cmdicdn.sd.di.huc.knaw.nl/js/ccfparser.js"></script>
+    <script type="text/javascript" src="/js/ccfparser.js"></script>
 
     <script>
         $('document').ready(function () {
